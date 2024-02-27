@@ -188,39 +188,38 @@ EOF
 
 # Define an array of Flatpak application IDs
 flatpak_apps=(
-#    "com.sindresorhus.Caprine"
-#    "org.gnome.Shotwell"
-#    "com.transmissionbt.Transmission"
-#    "com.anydesk.Anydesk"
-#    "me.kozec.syncthingtk"
-#    "com.github.zocker_160.SyncThingy"
-    "com.microsoft.EdgeDev"
-
-#    "org.onlyoffice.desktopeditors"
-#    "com.wps.Office"
-#    "org.blender.Blender"
+    "com.google.ChromeDev"
     "com.jgraph.drawio.desktop"
-#    "org.gimp.GIMP"
-#    "org.kde.krita"
-
+    "com.microsoft.EdgeDev"
     "io.github.wereturtle.ghostwriter"
+    "one.ablaze.floorp"
+#    "com.anydesk.Anydesk"
+#    "com.discordapp.Discord"
+#    "com.github.zocker_160.SyncThingy"
+#    "com.google.Chrome"
+#    "com.sindresorhus.Caprine"
+#    "com.transmissionbt.Transmission"
+#    "com.wps.Office"
+#    "io.github.shiftey.Desktop"
+#    "me.kozec.syncthingtk"
 #    "net.scribus.Scribus"
-
+#    "org.blender.Blender"
+#    "org.gimp.GIMP"
+#    "org.gnome.Shotwell"
+#    "org.inkscape.Inkscape"
+#    "org.kde.krita"
+#    "org.onlyoffice.desktopeditors"
 #    "org.telegram.desktop"
 #    "org.telegram.desktop.webview"
-#    "io.github.shiftey.Desktop"
 #    "org.videolan.VLC"
-#    "org.inkscape.Inkscape"
-#    "com.discordapp.Discord"
-    "com.google.ChromeDev"
-#    "com.google.Chrome"
-    "one.ablaze.floorp"
 )
 
 # Install applications
 for app in "${flatpak_apps[@]}"; do
     flatpak install -y flathub "$app"
 done
+
+flatpak install flathub-beta thunderbird
 
 echo -e "\e[1;32m[✔]\e[0m Checking updates for installed flatpak programs...\n"
 flatpak update -y

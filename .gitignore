@@ -10,3 +10,6 @@ temp/
 
 # ignore .git files
 .git*
+
+# ignore .backup files
+*.backup
