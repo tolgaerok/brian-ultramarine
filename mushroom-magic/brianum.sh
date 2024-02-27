@@ -1,24 +1,22 @@
 #!/bin/bash
 
-# Tolga Erok
-# My personal Fedora 39 KDE tweaker
+# Brian Francisco
+# My personal Ultramarine/Fedora KDE tweaker
 # 18/11/2023
 
 # Run from remote location:
-# sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/tolgaerok/tolga-scripts/main/Fedora39/TolgaFedora39.sh)"
+# sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/wvpianoman/brian-ultramarine/main/mushroom-magic/brianum.sh)"
 
 #  ¯\_(ツ)_/¯
-#    █████▒▓█████ ▓█████▄  ▒█████   ██▀███   ▄▄▄
-#  ▓██   ▒ ▓█   ▀ ▒██▀ ██▌▒██▒  ██▒▓██ ▒ ██▒▒████▄
-#  ▒████ ░ ▒███   ░██   █▌▒██░  ██▒▓██ ░▄█ ▒▒██  ▀█▄
-#  ░▓█▒  ░ ▒▓█  ▄ ░▓█▄   ▌▒██   ██░▒██▀▀█▄  ░██▄▄▄▄██
-#  ░▒█░    ░▒████▒░▒████▓ ░ ████▓▒░░██▓ ▒██▒ ▓█   ▓██▒
-#   ▒ ░    ░░ ▒░ ░ ▒▒▓  ▒ ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░
-#   ░       ░ ░  ░ ░ ▒  ▒   ░ ▒ ▒░   ░▒ ░ ▒░  ▒   ▒▒ ░
-#   ░ ░       ░    ░ ░  ░ ░ ░ ░ ▒    ░░   ░   ░   ▒
-#   ░  ░      ░    ░ ░     ░              ░  ░   ░
-
-# https://github.com/massgravel/Microsoft-Activation-Scripts
+#
+#  ██╗   ██╗██╗  ████████╗██████╗  █████╗ ███╗   ███╗ █████╗ ██████╗ ██╗███╗   ██╗███████╗
+#  ██║   ██║██║  ╚══██╔══╝██╔══██╗██╔══██╗████╗ ████║██╔══██╗██╔══██╗██║████╗  ██║██╔════╝
+#  ██║   ██║██║     ██║   ██████╔╝███████║██╔████╔██║███████║██████╔╝██║██╔██╗ ██║█████╗
+#  ██║   ██║██║     ██║   ██╔══██╗██╔══██║██║╚██╔╝██║██╔══██║██╔══██╗██║██║╚██╗██║██╔══╝
+#  ╚██████╔╝███████╗██║   ██║  ██║██║  ██║██║ ╚═╝ ██║██║  ██║██║  ██║██║██║ ╚████║███████╗
+#   ╚═════╝ ╚══════╝╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝
+#
+# https://patorjk.com/software/taag/#p=display&c=bash&f=ANSI%20Shadow&t=Ultramarine
 
 clear
 
@@ -108,7 +106,7 @@ sudo timedatectl set-ntp true
 [ -f /usr/bin/xdg-user-dirs-update ] && xdg-user-dirs-update
 
 # Set to performance
-[ -f /usr/bin/powerprofilesctl ] && powerprofilesctl list | grep -q performance && powerprofilesctl set performance
+#[ -f /usr/bin/powerprofilesctl ] && powerprofilesctl list | grep -q performance && powerprofilesctl set performance
 
 clear
 
@@ -258,13 +256,13 @@ echo "$(cat /etc/sddm.conf | sed -E s/'^\#?Numlock\=.*$'/'Numlock=on'/)" | sudo 
 
 echo""
 # for_exit "figlet"
-figlet Fedora_39 Tweaks
+figlet Ultramarine/Fedora Tweaks
 gum spin --spinner dot --title "Stand-by..." -- sleep 2
 
 # Function to display messages
 display_message() {
 	clear
-	echo -e "\n                  Tolga's online fedora updater\n"
+	echo -e "\n                  Brian's online Ultramarine/Fedora updater\n"
 	echo -e "\e[34m|--------------------\e[33m Currently configuring:\e[34m-------------------|"
 	echo -e "|${YELLOW}==>${NC}  $1"
 	echo -e "\e[34m|--------------------------------------------------------------|\e[0m"
@@ -344,8 +342,8 @@ dnf5() {
 		sudo dnf install dnf5 -y
 		sudo dnf5 install dnf5 dnf5-plugins
 		sudo dnf5 update && sudo dnf5 makecache
-		sudo dnf5 distro-sync --releasever=39 --refresh --disablerepo rawhide \
-			--enablerepo fedora --allowerasing --best
+	#	sudo dnf5 distro-sync --releasever=39 --refresh --disablerepo rawhide \
+	#		--enablerepo fedora --allowerasing --best
 		display_message "${GREEN}=>${NC} Beta: DNF5 installed"
 		echo -e "In order to use dnf5, you need to use ${YELLOW}==>${NC} ${GREEN} sudo dnf5 update${NC}"
 		gum spin --spinner dot --title "Stand-by..." -- sleep 5
@@ -901,7 +899,7 @@ update_flatpak() {
 	cleanup_flatpak_cruft
 }
 
-# Function to set UTC Time for dual boot issues, old hack of mine
+# Function to set UTC Time for dual boot issues, THanks Tolga Erok
 set_utc_time() {
 	display_message "Setting UTC Time..."
 
