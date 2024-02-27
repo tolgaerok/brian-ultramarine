@@ -196,8 +196,8 @@ flatpak_apps=(
 #    "com.github.zocker_160.SyncThingy"
     "com.microsoft.EdgeDev"
 
-    "org.onlyoffice.desktopeditors"
-    "com.wps.Office"
+#    "org.onlyoffice.desktopeditors"
+#    "com.wps.Office"
 #    "org.blender.Blender"
     "com.jgraph.drawio.desktop"
 #    "org.gimp.GIMP"

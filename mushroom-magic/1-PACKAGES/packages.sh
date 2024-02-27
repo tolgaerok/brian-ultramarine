@@ -20,4 +20,4 @@ sudo dnf install -y shotwell syncthing syncthing-tools blender gimp gimp-help kr
 
 #sudo dnf install -y transmission transmission-{remote-gtk,gtk,qt}
 
-
+sudo dnf install -y flameshot

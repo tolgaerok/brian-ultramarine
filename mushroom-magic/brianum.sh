@@ -43,7 +43,7 @@ fi
 BASHRC_FILE="$HOME/.bashrc"
 # desired_ps1='PS1="\[\e[1;32m\]┌[\[\e[1;32m\]\u\[\e[1;34m\]@\h\[\e[1;m\]] \[\e[1;m\]::\[\e[1;36m\] \W \[\e[1;m\]::\n\[\e[1;m\]└\[\e[1;33m\]➤ 🖐️👀 👉\[\e[0;m\] "'
 desired_ps1='PS1="\[\e[1;m\]┌[\[\e[1;32m\]\u\[\e[1;34m\]@\h\[\e[1;m\]] \[\e[1;m\]::\[\e[1;36m\] \W \[\e[1;m\]::\n\[\e[1;m\]└\[\e[1;33m\]➤ 🖐️👀 👉\[\e[0;m\]  "'
-fortune='echo "" && fortune && echo "" '
+fortune='echo "" && fortune | lolcat && echo "" '
 
 if ! grep -qF "$desired_ps1" "$BASHRC_FILE"; then
 	# Add desired PS1 configuration to .bashrc
@@ -97,7 +97,7 @@ SWAP_PATH="/swapfile"
 SWAP_SIZE=2G
 SYS_PATH="/etc/sysctl.conf"
 
-sudo dnf install -y figlet fortune
+sudo dnf install -y figlet fortune-mod lolcat
 
 # Update Time (Enable Network Time)
 sudo timedatectl set-ntp true
@@ -2072,13 +2072,13 @@ zram() {
 # Function to display the main menu.
 display_main_menu() {
 	clear
-	echo -e "\n                  Tolga's online Fedora updater\n"
+	echo -e "\n                  Brian's online Fedora updater\n"
 	echo -e "\e[34m|----| \e[33m Main Menu \e[34m |---------------------------------------------------------------------------------------------------------------------|\e[0m"
 	echo -e "\e[33m 1.\e[0m \e[32m Configure faster updates in DNF\e[0m"
 	echo -e "\e[33m 2.\e[0m \e[32m Install RPM Fusion repositories\e[0m"
 	echo -e "\e[33m 3.\e[0m \e[32m Update the system                                            ( Create meta cache etc )\e[0m"
 	echo -e "\e[33m 4.\e[0m \e[32m Install firmware updates                                     ( Not compatible with all systems )\e[0m"
-	echo -e "\e[33m 5.\e[0m \e[32m Install Nvidia / AMD GPU drivers                             ( Auto scan and install )\e[0m"
+	echo -e "\e[33m 5.\e[0m \e[32m Install AMD GPU drivers                                      ( Auto scan and install )\e[0m"
 	echo -e "\e[33m 6.\e[0m \e[32m Optimize battery life\e[0m"
 	echo -e "\e[33m 7.\e[0m \e[32m Install multimedia codecs\e[0m"
 	echo -e "\e[33m 8.\e[0m \e[32m Install H/W Video Acceleration for AMD or Intel\e[0m"
@@ -2163,7 +2163,7 @@ handle_user_input() {
 		for_exit "espeak"
 		duf
 		neofetch
-		figlet Fedora_39
+		figlet Ultramarine
 		#end_time=$(date +%s)
 		#time_taken=$((end_time - start_time))
 		# # espeak -v en-us+m7 -s 165 "ThankYou! For! Using! My Configurations! Bye! "
