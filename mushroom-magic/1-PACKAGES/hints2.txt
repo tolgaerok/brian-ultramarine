@@ -245,6 +245,215 @@ sudo fc-cache -vf
 # Removing zip Files
 rm ./FiraCode.zip ./Meslo.zip ./WPS-FONTS.zip
 
+####################################################
+
+install_apps() {
+	display_message "[${GREEN}✔${NC}]  Installing afew personal apps..."
+
+	remove_libreoffice
+
+	sudo dnf -y up
+	sudo dnf -y autoremove
+	sudo dnf -y clean all
+
+	# Enable trim support
+	sudo systemctl enable fstrim.timer
+
+	# Install Apps
+	sudo dnf install rpmfusion-free-release-tainted
+	sudo dnf install rpmfusion-nonfree-release-tainted
+	sudo dnf --repo=rpmfusion-nonfree-tainted install "*-firmware"
+
+	# Incase removed by libreoffice purge
+	packages=(
+		cjson-1.7.15-2.fc39.x86_64
+		codec2-1.2.0-2.fc39.x86_64
+		dbus-glib-0.112-6.fc39.x86_64
+		gtk2-immodule-xim-2.24.33-15.fc39.x86_64
+		gtk3-immodule-xim-3.24.39-1.fc39.x86_64
+		ibus-gtk4-1.5.29~rc2-6.fc39.x86_64
+		libXext-1.3.5-3.fc39.i686
+		libfreeaptx-0.1.1-5.fc39.x86_64
+		libgcab1-1.6-2.fc39.x86_64
+		librabbitmq-0.13.0-3.fc39.x86_64
+		librist-0.2.7-2.fc39.x86_64
+		libvdpau-1.5-4.fc39.i686
+		llvm16-libs-16.0.6-5.fc39.x86_64
+		lpcnetfreedv-0.5-3.fc39.x86_64
+		mbedtls-2.28.5-1.fc39.x86_64
+		ostree-2023.8-2.fc39.x86_64
+		pipewire-codec-aptx-1.0.0-1.fc39.x86_64
+		xorg-x11-fonts-ISO8859-1-100dpi-7.5-36.fc39.noarch
+	)
+
+	for package in "${packages[@]}"; do
+		sudo dnf install "$package" -y
+	done
+
+	packages=(
+		cjson-1.7.15-2.fc39.x86_64
+		codec2-1.2.0-2.fc39.x86_64
+		dbus-glib-0.112-6.fc39.x86_64
+		gtk2-immodule-xim-2.24.33-15.fc39.x86_64
+		gtk3-immodule-xim-3.24.39-1.fc39.x86_64
+		ibus-gtk4-1.5.29~rc2-6.fc39.x86_64
+		libXext-1.3.5-3.fc39.i686
+		libfreeaptx-0.1.1-5.fc39.x86_64
+		libgcab1-1.6-2.fc39.x86_64
+		librabbitmq-0.13.0-3.fc39.x86_64
+		librist-0.2.7-2.fc39.x86_64
+		libvdpau-1.5-4.fc39.i686
+		llvm16-libs-16.0.6-5.fc39.x86_64
+		lpcnetfreedv-0.5-3.fc39.x86_64
+		mbedtls-2.28.5-1.fc39.x86_64
+		ostree-2023.8-2.fc39.x86_64
+		pipewire-codec-aptx-1.0.0-1.fc39.x86_64
+		xorg-x11-fonts-ISO8859-1-100dpi-7.5-36.fc39.noarch
+	)
+
+	sudo dnf install "${packages[@]}"
+
+	# Essential Packages
+	if [ -f /usr/bin/nala ]; then
+		sudo nala install --assume-yes \
+			flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+			fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf ntfs-3g wget curl git openssh-client \
+			intel-media-va-driver i965-va-driver webext-ublock-origin-firefox
+
+	elif [ -f /usr/bin/dnf ]; then
+		sudo dnf install --assumeyes --best --allowerasing \
+			flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+			google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
+			libva-intel-driver intel-media-driver mozilla-ublock-origin easyeffects pulseeffects
+	fi
+
+	# Audio
+	[ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
+	[ -f /usr/bin/pulseeffects ] && [ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
+
+	sudo dnf install -y PackageKit dconf-editor digikam direnv duf earlyoom espeak ffmpeg-libs figlet gedit gimp gimp-devel git gnome-font-viewer
+	sudo dnf install -y grub-customizer kate libdvdcss libffi-devel lsd mpg123 neofetch openssl-devel p7zip p7zip-plugins pip python3 python3-pip
+	sudo dnf install -y mesa-libGL mesa-libGLw mesa-libGLU mesa-libGLU-devel mesa-filesystem mesa-va-drivers mesa-libEGL mesa-libglapi mesa-libGL-devel mesa-vulkan-drivers mesa-libd3d-devel mesa-libOpenCL mesa-libOSMesa
+	sudo dnf install -y rhythmbox rygel shotwell sshpass sxiv timeshift unrar unzip cowsay fortune-mod
+
+	# NOT SURE ABOUT THIS sudo dnf install -y sshfs fuse-sshfs
+
+	sudo dnf install -y rsync openssh-server openssh-clients wsdd
+	sudo dnf install -y variety virt-manager wget xclip zstd fd-find fzf gtk3 rygel
+	sudo dnf install dnf5 dnf5-plugins dnfdragora
+
+	# Configure fortune
+	# If you want to display a specific fortune file or category, you can use the -e option followed by the file or category name. For example:
+	# fortune -e art ascii-art bofh-excuses computers cookie definitions disclaimer drugs education fortunes humorists kernelnewbies knghtbrd law linux literature miscellaneous news people riddles science
+	# or to see a list:
+	# fortune -f
+
+	sudo dnf install --assumeyes --best --allowerasing \
+		flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+		google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
+		libva-intel-driver intel-media-driver mozilla-ublock-origin easyeffects pulseeffects
+
+	sudo dnf install -y 'google-roboto*' 'mozilla-fira*' fira-code-fonts
+
+	# Execute rygel to start DLNA sharing
+	/usr/bin/rygel-preferences
+
+	# Install profile-sync: it to manage browser profile(s) in tmpfs and to periodically sync back to the physical disc (HDD/SSD)
+	sudo dnf install profile-sync-daemon
+	/usr/bin/profile-sync-daemon preview
+	# sudo dnf remove profile-sync-daemon
+	# psd profile located in $HOME/.config/psd/psd.conf
+
+	## Networking packages
+	sudo dnf -y install iptables iptables-services nftables
+
+	## System utilities
+	sudo dnf -y install bash-completion busybox crontabs ca-certificates curl dnf-plugins-core dnf-utils gnupg2 nano screen ufw unzip vim wget zip
+
+	## Programming and development tools
+	sudo dnf -y install autoconf automake bash-completion git libtool make pkg-config python3 python3-pip
+
+	## Additional libraries and dependencies
+	sudo dnf -y install bc binutils haveged jq libsodium libsodium-devel PackageKit qrencode socat
+
+	## Miscellaneous
+	sudo dnf -y install dialog htop net-tools
+
+	sudo dnf swap -y libavcodec-free libavcodec-freeworld --allowerasing
+	sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
+
+	display_message "[${GREEN}✔${NC}]  Installing GUM"
+
+	echo '[charm]
+name=Charm
+baseurl=https://repo.charm.sh/yum/
+enabled=1
+gpgcheck=1
+gpgkey=https://repo.charm.sh/yum/gpg.key' | sudo tee /etc/yum.repos.d/charm.repo
+	sudo yum install gum -y
+
+	gum spin --spinner dot --title "GUM installed" -- sleep 2
+
+	## Make a backup of the original sysctl.conf file
+	display_message "[${GREEN}✔${NC}]  Tweaking network settings"
+
+	cp $SYS_PATH /etc/sysctl.conf.bak
+
+	echo
+	yellow_msg 'Default sysctl.conf file Saved. Directory: /etc/sysctl.conf.bak'
+	echo
+	gum spin --spinner dot --title "Stand-by..." -- sleep 1
+##############################################################
+	# Install some fonts
+	display_message "[${GREEN}✔${NC}]  Installing some fonts"
+	sudo dnf install -y fontawesome-fonts powerline-fonts
+	sudo mkdir -p ~/.local/share/fonts
+	cd ~/.local/share/fonts && curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DroidSansMono/DroidSansMNerdFont-Regular.otf
+	wget https://github.com/tolgaerok/fonts-tolga/raw/main/WPS-FONTS.zip
+	unzip WPS-FONTS.zip -d /usr/share/fonts
+
+	zip_file="Apple-Fonts-San-Francisco-New-York-master.zip"
+
+	# Check if the ZIP file exists
+	if [ -f "$zip_file" ]; then
+		# Remove existing ZIP file
+		sudo rm -f "$zip_file"
+		echo "Existing ZIP file removed."
+	fi
+
+	# Download the ZIP file
+	curl -LJO https://github.com/tolgaerok/Apple-Fonts-San-Francisco-New-York/archive/refs/heads/master.zip
+
+	# Check if the download was successful
+	if [ -f "$zip_file" ]; then
+		# Unzip the contents to the system-wide fonts directory
+		sudo unzip -o "$zip_file" -d /usr/share/fonts/
+
+		# Update font cache
+		sudo fc-cache -f -v
+
+		# Remove the ZIP file
+		rm "$zip_file"
+
+		display_message "[${GREEN}✔${NC}] Apple fonts installed successfully."
+		echo ""
+		gum spin --spinner dot --title "Re-thinking... 1 sec" -- sleep 2
+	else
+		display_message "[${RED}✘${NC}] Download failed. Please check the URL and try again."
+		gum spin --spinner dot --title "Stand-by..." -- sleep 2
+	fi
+
+	# Reloading Font
+	sudo fc-cache -vf
+
+	# Removing zip Files
+	rm ./WPS-FONTS.zip
+	sudo fc-cache -f -v
+
+	sudo dnf install fontconfig-font-replacements -y --skip-broken && sudo dnf install fontconfig-enhanced-defaults -y --skip-broken
+
+	sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/tolgaerok/tolga-scripts/main/Fedora39/San-Francisco-family/San-Francisco-family.sh)"
+	###################################################
 # Function to remove residual configuration files
 function remove_residual_config_files() {
     packages=$(dpkg -l | awk '/^rc/ { print $2 }')

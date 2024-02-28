@@ -1094,55 +1094,7 @@ EOF
 	sudo systemctl enable --now preload.service
 	gum spin --spinner dot --title "Standby.." -- sleep 1.5
 
-	# Install some fonts
-	display_message "[${GREEN}✔${NC}]  Installing some fonts"
-	sudo dnf install -y fontawesome-fonts powerline-fonts
-	sudo mkdir -p ~/.local/share/fonts
-	cd ~/.local/share/fonts && curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DroidSansMono/DroidSansMNerdFont-Regular.otf
-	wget https://github.com/tolgaerok/fonts-tolga/raw/main/WPS-FONTS.zip
-	unzip WPS-FONTS.zip -d /usr/share/fonts
 
-	zip_file="Apple-Fonts-San-Francisco-New-York-master.zip"
-
-	# Check if the ZIP file exists
-	if [ -f "$zip_file" ]; then
-		# Remove existing ZIP file
-		sudo rm -f "$zip_file"
-		echo "Existing ZIP file removed."
-	fi
-
-	# Download the ZIP file
-	curl -LJO https://github.com/tolgaerok/Apple-Fonts-San-Francisco-New-York/archive/refs/heads/master.zip
-
-	# Check if the download was successful
-	if [ -f "$zip_file" ]; then
-		# Unzip the contents to the system-wide fonts directory
-		sudo unzip -o "$zip_file" -d /usr/share/fonts/
-
-		# Update font cache
-		sudo fc-cache -f -v
-
-		# Remove the ZIP file
-		rm "$zip_file"
-
-		display_message "[${GREEN}✔${NC}] Apple fonts installed successfully."
-		echo ""
-		gum spin --spinner dot --title "Re-thinking... 1 sec" -- sleep 2
-	else
-		display_message "[${RED}✘${NC}] Download failed. Please check the URL and try again."
-		gum spin --spinner dot --title "Stand-by..." -- sleep 2
-	fi
-
-	# Reloading Font
-	sudo fc-cache -vf
-
-	# Removing zip Files
-	rm ./WPS-FONTS.zip
-	sudo fc-cache -f -v
-
-	sudo dnf install fontconfig-font-replacements -y --skip-broken && sudo dnf install fontconfig-enhanced-defaults -y --skip-broken
-
-	sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/tolgaerok/tolga-scripts/main/Fedora39/San-Francisco-family/San-Francisco-family.sh)"
 
 	# Install OpenRGB.
 	display_message "[${GREEN}✔${NC}]  Installing OpenRGB"
