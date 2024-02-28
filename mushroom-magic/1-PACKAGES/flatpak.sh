@@ -209,8 +209,8 @@ flatpak_apps=(
 #    "org.inkscape.Inkscape"
 #    "org.kde.krita"
 #    "org.onlyoffice.desktopeditors"
-#    "org.telegram.desktop"
-#    "org.telegram.desktop.webview"
+    "org.telegram.desktop"
+    "org.telegram.desktop.webview"
 #    "org.videolan.VLC"
 )
 
