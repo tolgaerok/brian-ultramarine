@@ -19,12 +19,60 @@
 
 # Install some software:
 software_packages=(
-    grep fortune-mod font-manager earlyoom direnv  espeak figlet sntp grub-customizer aria2 btop duf fonts-powerline
-    fancontrol variety rclone rclone-browser ugrep ripgrep meld pandoc tlp tlp-rdw tlpui powertop  rygel wsdd uget lsd
-    sxiv acl attr cifs-utils dnsutils ffmpeg ffmpegthumbnailer flatpak rar unrar p7zip-rar  gnome-software-plugin-flatpak
-    gstreamer1.0-{libav,tools,vaapi} gstreamer1.0-plugins-{bad,ugly} kdegraphics-thumbnailers libavcodec-extra neofetch ntp
-    ntpdate plocate snmp python3-setproctitle software-properties-common terminator ttf-mscorefonts-installer
-    tumbler-plugins-extra plasma-discover-backend-{fwupd,snap,flatpak}
+    acl
+    aria2
+    attr
+    btop
+    cifs-utils
+    direnv
+    dnsutils
+    duf
+    earlyoom
+    espeak
+    espeak-ng
+    fancontrol-{gui,gui-kcm,gui-plasmoid}
+    fastfetch
+    ffmpeg
+    ffmpegthumbs
+    figlet
+    flatpak
+    fortune-mod
+    grep
+    grub-customizer
+    gstreamer1.0-plugins-{bad-free,bad-free-extras,good,good-extras,ugly,ugly-free}
+    gstreamer1.0-{libav,vaapi}
+    kdegraphics-thumbnailers
+    libavcodec-{free,freeworld}
+    lsd
+    meld
+    neofetch
+    net-snmp
+    p7zip
+    p7zip-plugins
+    p7zip-gui
+    pandoc
+    plasma-discover-{flatpak,packagekit,snap}
+    plocate
+    powertop
+    python3-setproctitle
+    rclone
+    rclone-browser
+    ripgrep
+    rygel
+
+    software-properties-common
+    sxiv
+    terminator
+    tlp
+    tlp-rdw
+    tlpui
+    ttf-mscorefonts-installer
+    tumbler-plugins-extra
+    uget
+    ugrep
+    unrar
+    variety
+    wsdd
     )
 
 software_explanations=(
@@ -34,48 +82,49 @@ software_explanations=(
     "btop                              Modern and colorful command line resource monitor that shows usage and stats"
     "cifs-utils                        Utilities for mounting and managing CIFS/SMB file systems."
     "direnv                            Utility to set directory specific environment variables"
-    "dnsutils                          DNS utilities for querying DNS servers."
+    "dns-utils                         DNS utilities for querying DNS servers."
     "duf                               Disk Usage/Free Utility"
     "earlyoom                          Early OOM Daemon"
     "espeak                            Multi-lingual software speech synthesizer"
-    "fancontrol                        utility to control the fan speed"
+    "espeak-ng                         eSpeak Next Geberation open source speech synthesizer"
+    "fancontrol                        utility to control the fan speed (GUI, KCM and Plasmoid)"
+    "fastfetch                         Like neofetch, but much faster because written in c"
     "ffmpeg                            Complete, cross-platform solution for recording, converting, and streaming audio and video."
-    "ffmpegthumbnailer                 Lightweight video thumbnailer."
+    "ffmpegthumbs                      KDE ffmpegthumbnailer service"
     "figlet                            Make large character ASCII banners out of ordinary text"
     "flatpak                           Application sandboxing and distribution framework."
     "font-manager                      font management application for the GNOME desktop"
-    "fonts-powerline                   prompt and statusline utility (symbols font)"
     "fortune-mod                       provides fortune cookies on demand"
     "grep                              GNU grep. egrep and fgrep"
     "grub-customizer                   GUI to configure GRUB2 and BURG"
-    "gstreamer1.0-libav                GStreamer plugins for the libav codec library."
-    "gstreamer1.0-plugins-bad          GStreamer plugins from the 'bad' set."
-    "gstreamer1.0-plugins-ugly         GStreamer plugins from the 'ugly' set."
-    "gstreamer1.0-tools                Tools for GStreamer multimedia framework."
+    "gstreamer1-libav                  GStreamer plugins for the libav codec library."
+    "gstreamer1-plugins-bad-free       GStreamer plugins from the 'bad' set (+ extras)."
+    "gstreamer1-plugins-good           GStreamer plugins with good code and licensing (+ extras)"
+    "gstreamer1-plugins-ugly           GStreamer plugins from the 'ugly' set (+ free)."
     "gstreamer1.0-vaapi                GStreamer plugins for video decoding/encoding using VA-API."
     "kdegraphics-thumbnailers          Graphics file format thumbnailers for KDE."
-    "libavcodec-extra                  Extra multimedia codecs for libavcodec."
+    "libavcodec-free                   FFmpeg codec library"
+    "libavcodec-freeworld              Freeworld libavcodec to complement the distro counterparts"
     "lsd                               ls command with a lot of pretty colors and some other stuff"
     "meld                              graphical tool to diff and merge files"
     "neofetch                          Fast, highly customizable system info script."
-    "ntp                               Network Time Protocol daemon and utility programs."
-    "ntpdate                           Client for setting system time from NTP servers."
-    "nvidia-detect                     NVIDIA GPU detection utility."
-    "p7zip-rar                         RAR support for p7zip."
+    "net-snmp                          A collection of SNMP (Simple Network Management Protocol) tools and libraries"
+    "p7zip                             Very high compression ratio file archiver"
+    "p7zip-plugins                     Additional plugins for p7zip"
+    "p7zip-gui                         7zG - 7-Zip GUI version"
     "pandoc                            general markup converter"
-    "plasma-discover-backend-flatpak   Flatpak backend for Plasma Discover."
-    "plasma-discover-backend-fwupd     Discover software management suite - fwupd backend"
-    "plasma-discover-backend-snap      Discover software management suite - Snap backend"
+    "plasma-discover-flatpak           Plasma Discover flatpak support"
+    "plasma-discover-packagekit        Plasma Discover PackageKit support"
+    "plasma-discover-snap              Plasma Discover snap support"
     "plocate                           Fast filesystem search tool."
     "powertop                          diagnose issues with power consumption and management"
     "python3-setproctitle              Allow customization of the process title."
-    "rar                               Archive manager for RAR files."
     "rclone                            rsync for commercial cloud storage"
     "rclone-browser                    Simple cross platform GUI for rclone"
     "ripgrep                           recursively searches your current directory for a regex"
     "rygel                             GNOME UPnP/DLNA services"
-    "snmp                              SNMP (Simple Network Management Protocol) applications."
-    "sntp                              Simple Network Time Protocol (SNTP) client."
+
+
     "software-properties-common        Software properties common utilities."
     "sxiv                              simple X image viewer"
     "terminator                        Multiple GNOME terminals in one window."
@@ -106,6 +155,9 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 else
     echo "Package installation skipped."
 fi
+
+dnf copr enable jerrycasiano/FontManager
+dnf install font-manager
 
 # Install some software:
 software_packages2=(
