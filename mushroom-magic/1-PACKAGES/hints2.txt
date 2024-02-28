@@ -22,8 +22,8 @@ software_packages=(
     acl aria2 attr btop cifs-utils direnv dnsutils duf earlyoom espeak espeak-ng fancontrol-{gui,gui-kcm,gui-plasmoid}
     fastfetch ffmpeg ffmpegthumbs figlet flatpak fortune-mod grep grub-customizer gstreamer1.0-{libav,vaapi}
     gstreamer1.0-plugins-{bad-free,bad-free-extras,good,good-extras,ugly,ugly-free}
-
-
+    )
+software_packages2=(
     kdegraphics-thumbnailers libavcodec-{free,freeworld} lsd meld neofetch net-snmp p7zip p7zip-plugins p7zip-gui
     pandoc plasma-discover-{flatpak,packagekit,snap} plocate powertop python3-setproctitle rclone rclone-browser
     ripgrep rygel sxiv terminator tlp tlp-rdw tlpi tumbler tumbler-extra ugrep unrar unrar-free variety wsdd
@@ -56,7 +56,8 @@ software_explanations=(
     "gstreamer1-plugins-good           GStreamer plugins with good code and licensing (+ extras)"
     "gstreamer1-plugins-ugly           GStreamer plugins from the 'ugly' set (+ free)."
     "gstreamer1.0-vaapi                GStreamer plugins for video decoding/encoding using VA-API."
-
+    )
+software_explanations2=(
     "kdegraphics-thumbnailers          Graphics file format thumbnailers for KDE."
     "libavcodec-free                   FFmpeg codec library"
     "libavcodec-freeworld              Freeworld libavcodec to complement the distro counterparts"
@@ -108,19 +109,32 @@ else
     echo "Package installation skipped."
 fi
 
+echo "The following packages will be installed:"
+for ((i = 0; i < ${#software_packages2[@]}; i++)); do
+    echo "- ${software_explanations2[i]}"
+done
+
+echo
+read -p "Do you want to proceed with the installation? (y/n): " choice
+
+if [[ $choice =~ ^[Yy]$ ]]; then
+    echo "Installing the packages..."
+    sudo apt install -y --install-recommends "${software_packages2[@]}"
+    echo "Package installation completed."
+else
+    echo "Package installation skipped."
+fi
+
 dnf copr enable jerrycasiano/FontManager
 dnf install font-manager
 
-sudo dnf install curl cabextract xorg-x11-font-utils fontconfig -y
-sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
-
 # Install some software:
-software_packages2=(
+software_packages3=(
     blender boomaga flameshot gimp gimp-help gimp-data-extras inkscape krita neochat rhythmbox scribus scribus-doc
     scribus-template shotwell simplescreenrecorder syncthing transmission transmission-{remote-gtk,gtk,qt} uget vlc
     )
 
-software_explanations2=(
+software_explanations3=(
     "blender                           Very fast and versatile 3D modeller/renderer"
     "boomaga                           virtual printer for viewing a document before printing"
     "flameshot                         Powerful yet simple to use screenshot software."
@@ -144,8 +158,8 @@ software_explanations2=(
 )
 
 echo "The following packages will be installed:"
-for ((i = 0; i < ${#software_packages2[@]}; i++)); do
-    echo "- ${software_explanations2[i]}"
+for ((i = 0; i < ${#software_packages3[@]}; i++)); do
+    echo "- ${software_explanations3[i]}"
 done
 
 echo
@@ -153,7 +167,7 @@ read -p "Do you want to proceed with the installation? (y/n): " choice
 
 if [[ $choice =~ ^[Yy]$ ]]; then
     echo "Installing the packages..."
-    sudo apt install -y --install-recommends "${software_packages2[@]}"
+    sudo apt install -y --install-recommends "${software_packages3[@]}"
     echo "Package installation completed."
 else
     echo "Package installation skipped."
@@ -214,6 +228,9 @@ fi
 
 
 # Installing fonts
+sudo dnf install curl cabextract xorg-x11-font-utils fontconfig -y
+sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+
 sudo apt install fonts-font-awesome
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
 sudo unzip FiraCode.zip -d /usr/share/fonts
