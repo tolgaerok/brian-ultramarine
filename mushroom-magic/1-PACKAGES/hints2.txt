@@ -3,76 +3,30 @@
 
 # Brian Francisco
 # Personal use case packages
-# Jan 20 2024
+# 27 Feb 2024
 
 #   《˘ ͜ʖ ˘》
 #
-#  ███╗   ███╗██╗  ██╗    ██╗     ██╗███╗   ██╗██╗   ██╗██╗  ██╗    ██████╗ ██╗  ██╗ ██████╗ ███████╗
-#  ████╗ ████║╚██╗██╔╝    ██║     ██║████╗  ██║██║   ██║╚██╗██╔╝    ██╔══██╗██║ ██╔╝██╔════╝ ██╔════╝
-#  ██╔████╔██║ ╚███╔╝     ██║     ██║██╔██╗ ██║██║   ██║ ╚███╔╝     ██████╔╝█████╔╝ ██║  ███╗███████╗
-#  ██║╚██╔╝██║ ██╔██╗     ██║     ██║██║╚██╗██║██║   ██║ ██╔██╗     ██╔═══╝ ██╔═██╗ ██║   ██║╚════██║
-#  ██║ ╚═╝ ██║██╔╝ ██╗    ███████╗██║██║ ╚████║╚██████╔╝██╔╝ ██╗    ██║     ██║  ██╗╚██████╔╝███████║
-#  ╚═╝     ╚═╝╚═╝  ╚═╝    ╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝    ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+#  ██╗   ██╗██╗  ████████╗██████╗  █████╗ ███╗   ███╗ █████╗ ██████╗ ██╗███╗   ██╗███████╗    ██████╗ ██╗  ██╗ ██████╗ ███████╗
+#  ██║   ██║██║  ╚══██╔══╝██╔══██╗██╔══██╗████╗ ████║██╔══██╗██╔══██╗██║████╗  ██║██╔════╝    ██╔══██╗██║ ██╔╝██╔════╝ ██╔════╝
+#  ██║   ██║██║     ██║   ██████╔╝███████║██╔████╔██║███████║██████╔╝██║██╔██╗ ██║█████╗      ██████╔╝█████╔╝ ██║  ███╗███████╗
+#  ██║   ██║██║     ██║   ██╔══██╗██╔══██║██║╚██╔╝██║██╔══██║██╔══██╗██║██║╚██╗██║██╔══╝      ██╔═══╝ ██╔═██╗ ██║   ██║╚════██║
+#  ╚██████╔╝███████╗██║   ██║  ██║██║  ██║██║ ╚═╝ ██║██║  ██║██║  ██║██║██║ ╚████║███████╗    ██║     ██║  ██╗╚██████╔╝███████║
+#   ╚═════╝ ╚══════╝╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝    ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 #
-#https://patorjk.com/software/taag/#p=display&c=bash&f=ANSI%20Shadow&t=MX%20Linux%20Pkgs
+# https://patorjk.com/software/taag/#p=display&c=bash&f=ANSI%20Shadow&t=Ultramarine%20Pkgs
 
 
 # Install some software:
 software_packages=(
-    acl
-    aria2
-    attr
-    btop
-    cifs-utils
-    direnv
-    dnsutils
-    duf
-    earlyoom
-    espeak
-    espeak-ng
-    fancontrol-{gui,gui-kcm,gui-plasmoid}
-    fastfetch
-    ffmpeg
-    ffmpegthumbs
-    figlet
-    flatpak
-    fortune-mod
-    grep
-    grub-customizer
+    acl aria2 attr btop cifs-utils direnv dnsutils duf earlyoom espeak espeak-ng fancontrol-{gui,gui-kcm,gui-plasmoid}
+    fastfetch ffmpeg ffmpegthumbs figlet flatpak fortune-mod grep grub-customizer gstreamer1.0-{libav,vaapi}
     gstreamer1.0-plugins-{bad-free,bad-free-extras,good,good-extras,ugly,ugly-free}
-    gstreamer1.0-{libav,vaapi}
-    kdegraphics-thumbnailers
-    libavcodec-{free,freeworld}
-    lsd
-    meld
-    neofetch
-    net-snmp
-    p7zip
-    p7zip-plugins
-    p7zip-gui
-    pandoc
-    plasma-discover-{flatpak,packagekit,snap}
-    plocate
-    powertop
-    python3-setproctitle
-    rclone
-    rclone-browser
-    ripgrep
-    rygel
 
-    software-properties-common
-    sxiv
-    terminator
-    tlp
-    tlp-rdw
-    tlpui
-    ttf-mscorefonts-installer
-    tumbler-plugins-extra
-    uget
-    ugrep
-    unrar
-    variety
-    wsdd
+
+    kdegraphics-thumbnailers libavcodec-{free,freeworld} lsd meld neofetch net-snmp p7zip p7zip-plugins p7zip-gui
+    pandoc plasma-discover-{flatpak,packagekit,snap} plocate powertop python3-setproctitle rclone rclone-browser
+    ripgrep rygel sxiv terminator tlp tlp-rdw tlpi tumbler tumbler-extra ugrep unrar unrar-free variety wsdd
     )
 
 software_explanations=(
@@ -102,6 +56,7 @@ software_explanations=(
     "gstreamer1-plugins-good           GStreamer plugins with good code and licensing (+ extras)"
     "gstreamer1-plugins-ugly           GStreamer plugins from the 'ugly' set (+ free)."
     "gstreamer1.0-vaapi                GStreamer plugins for video decoding/encoding using VA-API."
+
     "kdegraphics-thumbnailers          Graphics file format thumbnailers for KDE."
     "libavcodec-free                   FFmpeg codec library"
     "libavcodec-freeworld              Freeworld libavcodec to complement the distro counterparts"
@@ -123,19 +78,16 @@ software_explanations=(
     "rclone-browser                    Simple cross platform GUI for rclone"
     "ripgrep                           recursively searches your current directory for a regex"
     "rygel                             GNOME UPnP/DLNA services"
-
-
-    "software-properties-common        Software properties common utilities."
     "sxiv                              simple X image viewer"
     "terminator                        Multiple GNOME terminals in one window."
     "tlp                               feature-rich command-line utility, saving laptop battery power"
     "tlp-rdw                           TLP Radio device wizard providing event based switching of bluetooth, NFC, Wi-Fi and WWAN"
-    "tlpui                             GUI for easy TLP configuration"
-    "ttf-mscorefonts-installer         Installer for Microsoft TrueType core fonts."
-    "tumbler-plugins-extra             Additional plugins for the tumbler thumbnail rendering service."
-    "uget                              easy-to-use download manager written in GTK+"
+    "tlpi                              Utilities to display namespaces and control groups"
+    "tumbler                           D-Bus service for applications to request thumbnails"
+    "tumbler-extra                     Additional plugins for the tumbler thumbnail rendering service."
     "ugrep                             faster grep with an interactive query GUI"
     "unrar                             Extract files from RAR archives."
+    "unrar-free                        Free software version of the non-free unrar utility"
     "variety                           Wallpaper changer, downloader and manager"
     "wsdd                              Python Web Services Discovery Daemon, Windows Net Browsing"
 )
@@ -159,10 +111,13 @@ fi
 dnf copr enable jerrycasiano/FontManager
 dnf install font-manager
 
+sudo dnf install curl cabextract xorg-x11-font-utils fontconfig -y
+sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+
 # Install some software:
 software_packages2=(
     blender boomaga flameshot gimp gimp-help gimp-data-extras inkscape krita neochat rhythmbox scribus scribus-doc
-    scribus-template shotwell simplescreenrecorder syncthing transmission transmission-{remote-gtk,gtk,qt} vlc
+    scribus-template shotwell simplescreenrecorder syncthing transmission transmission-{remote-gtk,gtk,qt} uget vlc
     )
 
 software_explanations2=(
@@ -184,6 +139,7 @@ software_explanations2=(
     "syncthing.x86_64                  Continuous File Synchronization"
     "transmission                      Lightweight BitTorrent Client"
     "transmission-{remote-gtk,gtk,qt}  Lightweight BitTorrent Client (GTK+ & QT Interface)"
+    "uget                              easy-to-use download manager written in GTK+"
     "vlc                               Multimedia player and streaming server."
 )
 
