@@ -20,13 +20,16 @@
 # Install some software:
 software_packages=(
     acl aria2 attr btop cifs-utils curl direnv dnsutils duf earlyoom espeak espeak-ng easyeffects fancontrol-{gui,gui-kcm,gui-plasmoid}
-    fastfetch ffmpeg ffmpegthumbs ffmpegthumbnailer figlet flatpak fortune-mod git google-noto-emoji-color-fonts grep grub-customizer gstreamer1.0-{libav,vaapi}
-    gstreamer1.0-plugins-{bad-free,bad-free-extras,good,good-extras,ugly,ugly-free} gtk-murrine-engine gtk2-engines
+    fastfetch ffmpeg ffmpegthumbs ffmpegthumbnailer figlet flatpak fortune-mod git google-noto-emoji-color-fonts grep grub-customizer
+    )
+software_packages1=(
+    gstreamer1.0-{libav,vaapi} gstreamer1.0-plugins-{bad-free,bad-free-extras,good,good-extras,ugly,ugly-free} gtk-murrine-engine
+    gtk2-engines intel-media-driver kdegraphics-thumbnailers libavcodec-{free,freeworld} libva-intel-driver lsd meld mozilla-ublock-origin
+    nano neofetch net-snmp openssh p7zip p7zip-plugins p7zip-gui pandoc plasma-discover-{flatpak,packagekit,snap} plocate
     )
 software_packages2=(
-    intel-media-driver kdegraphics-thumbnailers libavcodec-{free,freeworld} libva-intel-driver lsd meld mozilla-ublock-origin nano neofetch net-snmp openssh p7zip p7zip-plugins p7zip-gui
-    pandoc plasma-discover-{flatpak,packagekit,snap} plocate powertop pulseeffects python3-setproctitle rclone rclone-browser
-    ripgrep rygel sassc sxiv tar terminator tlp tlp-rdw tlpi tumbler tumbler-extra ugrep un{zip,rar} unrar-free variety wget wsdd zip
+    powertop pulseeffects python3-setproctitle rclone rclone-browser ripgrep rygel sassc sxiv tar terminator tlp tlp-rdw tlpi tumbler
+    tumbler-extra ugrep un{zip,rar} unrar-free variety wget wsdd zip
     )
 
 software_explanations=(
@@ -56,17 +59,16 @@ software_explanations=(
     "google-noto-emoji-color-fonts     Google “Noto Color Emoji” colored emoji font"
     "grep                              GNU grep. egrep and fgrep"
     "grub-customizer                   GUI to configure GRUB2 and BURG"
+    )
+
+software_explanations1=(
     "gstreamer1-libav                  GStreamer plugins for the libav codec library."
     "gstreamer1-plugins-bad-free       GStreamer plugins from the 'bad' set (+ extras)."
     "gstreamer1-plugins-good           GStreamer plugins with good code and licensing (+ extras)"
     "gstreamer1-plugins-ugly           GStreamer plugins from the 'ugly' set (+ free)."
     "gstreamer1.0-vaapi                GStreamer plugins for video decoding/encoding using VA-API."
     "gtk-murrine-engine                Murrine GTK2 engine"
-    "gtk2-engines                      Murrine GTK2 engine"
-    )
-
-software_explanations2=(
-    "intel-media-driver                The Intel Media Driver for VAAPI"
+    "gtk2-engines                      Murrine GTK2 engine"    "intel-media-driver                The Intel Media Driver for VAAPI"
     "kdegraphics-thumbnailers          Graphics file format thumbnailers for KDE."
     "libavcodec-free                   FFmpeg codec library"
     "libavcodec-freeworld              Freeworld libavcodec to complement the distro counterparts"
@@ -86,6 +88,9 @@ software_explanations2=(
     "plasma-discover-packagekit        Plasma Discover PackageKit support"
     "plasma-discover-snap              Plasma Discover snap support"
     "plocate                           Fast filesystem search tool."
+    )
+
+software_explanations2=(
     "powertop                          diagnose issues with power consumption and management"
     "pulseeffects                      "
     "python3-setproctitle              Allow customization of the process title."
@@ -129,6 +134,22 @@ else
 fi
 
 echo "The following packages will be installed:"
+for ((i = 0; i < ${#software_packages1[@]}; i++)); do
+    echo "- ${software_explanations1[i]}"
+done
+
+echo
+read -p "Do you want to proceed with the installation? (y/n): " choice
+
+if [[ $choice =~ ^[Yy]$ ]]; then
+    echo "Installing the packages..."
+    sudo apt install -y --install-recommends "${software_packages1[@]}"
+    echo "Package installation completed."
+else
+    echo "Package installation skipped."
+fi
+
+echo "The following packages will be installed:"
 for ((i = 0; i < ${#software_packages2[@]}; i++)); do
     echo "- ${software_explanations2[i]}"
 done
@@ -148,14 +169,15 @@ dnf copr enable jerrycasiano/FontManager
 dnf install font-manager
 
 # Install some software:
-software_packages3=(
-    blender boomaga flameshot gimp gimp-help gimp-data-extras inkscape krita neochat rhythmbox scribus scribus-doc
+software_packages5=(
+    blender boomaga digfikam flameshot gimp gimp-help gimp-data-extras inkscape krita neochat rhythmbox scribus scribus-doc
     scribus-template shotwell simplescreenrecorder syncthing transmission transmission-{remote-gtk,gtk,qt} uget vlc
     )
 
 software_explanations3=(
     "blender                           Very fast and versatile 3D modeller/renderer"
     "boomaga                           virtual printer for viewing a document before printing"
+    "digikam                           A digital camera accessing & photo management application"
     "flameshot                         Powerful yet simple to use screenshot software."
     "gimp                              GNU Image Manipulation Program"
     "gimp-help                         Documentation for GIMP (English)"
@@ -169,7 +191,7 @@ software_explanations3=(
     "scribus-template                  additional scribus templates"
     "shotwell                          Digital Photo Organizer"
     "simplescreenrecorder              Feature-rich screen recorder for X11 and OpenGL"
-    "syncthing.x86_64                  Continuous File Synchronization"
+    "syncthing                         Continuous File Synchronization"
     "transmission                      Lightweight BitTorrent Client"
     "transmission-{remote-gtk,gtk,qt}  Lightweight BitTorrent Client (GTK+ & QT Interface)"
     "uget                              easy-to-use download manager written in GTK+"
@@ -177,8 +199,8 @@ software_explanations3=(
 )
 
 echo "The following packages will be installed:"
-for ((i = 0; i < ${#software_packages3[@]}; i++)); do
-    echo "- ${software_explanations3[i]}"
+for ((i = 0; i < ${#software_packages5[@]}; i++)); do
+    echo "- ${software_explanations5[i]}"
 done
 
 echo
@@ -186,7 +208,7 @@ read -p "Do you want to proceed with the installation? (y/n): " choice
 
 if [[ $choice =~ ^[Yy]$ ]]; then
     echo "Installing the packages..."
-    sudo apt install -y --install-recommends "${software_packages3[@]}"
+    sudo apt install -y --install-recommends "${software_packages5[@]}"
     echo "Package installation completed."
 else
     echo "Package installation skipped."
@@ -284,24 +306,23 @@ install_apps() {
 
 	# Incase removed by libreoffice purge
 	packages=(
-		cjson-1.7.15-2.fc39.x86_64
-		codec2-1.2.0-2.fc39.x86_64
-		dbus-glib-0.112-6.fc39.x86_64
-		gtk2-immodule-xim-2.24.33-15.fc39.x86_64
-		gtk3-immodule-xim-3.24.39-1.fc39.x86_64
-		ibus-gtk4-1.5.29~rc2-6.fc39.x86_64
-		libXext-1.3.5-3.fc39.i686
-		libfreeaptx-0.1.1-5.fc39.x86_64
-		libgcab1-1.6-2.fc39.x86_64
-		librabbitmq-0.13.0-3.fc39.x86_64
-		librist-0.2.7-2.fc39.x86_64
-		libvdpau-1.5-4.fc39.i686
-		llvm16-libs-16.0.6-5.fc39.x86_64
-		lpcnetfreedv-0.5-3.fc39.x86_64
-		mbedtls-2.28.5-1.fc39.x86_64
-		ostree-2023.8-2.fc39.x86_64
-		pipewire-codec-aptx-1.0.0-1.fc39.x86_64
-		xorg-x11-fonts-ISO8859-1-100dpi-7.5-36.fc39.noarch
+		cjson
+		codec2
+		dbus-glib
+		{gtk2,gtk3}-immodule-xim
+		ibus-gtk4
+		libXext
+		libfreeaptx
+		libgcab1
+		librabbitmq
+		librist
+		libvdpau
+		llvm16-libs
+		lpcnetfreedv
+		mbedtls
+		ostree
+		pipewire-codec-aptx
+		xorg-x11-fonts-ISO8859-1-100dpi
 	)
 
 	for package in "${packages[@]}"; do
@@ -338,16 +359,16 @@ install_apps() {
 	# Audio
 	[ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
 	[ -f /usr/bin/pulseeffects ] && [ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
-
-	sudo dnf install -y PackageKit dconf-editor digikam direnv duf earlyoom espeak ffmpeg-libs figlet gedit gimp gimp-devel git gnome-font-viewer
-	sudo dnf install -y grub-customizer kate libdvdcss libffi-devel lsd mpg123 neofetch openssl-devel p7zip p7zip-plugins pip python3 python3-pip
+-----------------------------------------------
+	sudo dnf install -y PackageKit dconf-editor      ffmpeg-libs      gnome-font-viewer
+	sudo dnf install -y  kate libdvdcss libffi-devel  mpg123  openssl-devel   pip python3 python3-pip
 	sudo dnf install -y mesa-libGL mesa-libGLw mesa-libGLU mesa-libGLU-devel mesa-filesystem mesa-va-drivers mesa-libEGL mesa-libglapi mesa-libGL-devel mesa-vulkan-drivers mesa-libd3d-devel mesa-libOpenCL mesa-libOSMesa
-	sudo dnf install -y rhythmbox rygel shotwell sshpass sxiv timeshift unrar unzip cowsay fortune-mod
+	sudo dnf install -y    sshpass  timeshift   cowsay
 
 	# NOT SURE ABOUT THIS sudo dnf install -y sshfs fuse-sshfs
 
 	sudo dnf install -y rsync openssh-server openssh-clients wsdd
-	sudo dnf install -y variety virt-manager wget xclip zstd fd-find fzf gtk3 rygel
+	sudo dnf install -y  virt-manager  xclip zstd fd-find fzf gtk3
 	sudo dnf install dnf5 dnf5-plugins dnfdragora
 
 	# Configure fortune
@@ -355,7 +376,7 @@ install_apps() {
 	# fortune -e art ascii-art bofh-excuses computers cookie definitions disclaimer drugs education fortunes humorists kernelnewbies knghtbrd law linux literature miscellaneous news people riddles science
 	# or to see a list:
 	# fortune -f
-
+-------------------------------------------
 	sudo dnf install --assumeyes --best --allowerasing \
 		flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
 		google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
