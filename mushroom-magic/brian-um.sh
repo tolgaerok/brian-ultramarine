@@ -377,7 +377,9 @@ install_rpmfusion() {
 
 	sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
 		https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-
+	sudo dnf install rpmfusion-free-release-tainted
+	sudo dnf install rpmfusion-nonfree-release-tainted
+	sudo dnf --repo=rpmfusion-nonfree-tainted install "*-firmware"
 	sudo dnf groupupdate core
 
 	check_error
