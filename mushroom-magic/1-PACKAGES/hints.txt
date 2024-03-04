@@ -564,7 +564,7 @@ sudo fstrim -av
 
 echo -e "\n\n----------------------------------------------"
 echo -e "|                                            |"
-echo -e "|        Setup Complete! Enjoy debian!       |"
+echo -e "|        Setup Complete! Enjoy Ultramarine   |"
 echo -e "|       Please run placeholder.sh            |"
 echo -e "|    to back up your APT packages and more   |"
 echo -e "|                                            |"
