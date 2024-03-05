@@ -19,10 +19,10 @@
 
 # Install some software:
 software_packages=(
-    acl aria2 attr autoconf automake bash-completion bc binutils btop busybox ca-certificates cifs-utils cjson codec2 cowsay crontabs curl dbus-glib dconf-editor dialog direnv dnf-plugins-core dnf-utils dnsutils duf earlyoom easyeffects espeak espeak-ng
+    acl arc-kde-yakuake aria2 attr autoconf automake bash-completion bc binutils btop busybox ca-certificates cifs-utils cjson codec2 cowsay crontabs curl dbus-glib dconf-editor dialog direnv dnf-plugins-core dnf-utils dnsutils duf earlyoom easyeffects espeak espeak-ng
     fancontrol-{gui,gui-kcm,gui-plasmoid} fastfetch fd-find ffmpeg ffmpeg-libs ffmpegthumbnailer ffmpegthumbs figlet flatpak font-manager fortune-mod git gnome-font-viewer gnupg2 google-noto-emoji-color-fonts grep grub-customizer gstreamer1.0-{libav,vaapi}
     gstreamer1.0-plugins-{bad-free,bad-free-extras,good,good-extras,ugly,ugly-free} gtk-murrine-engine gtk{2,3}-immodule-xim gtk2-engines haveged htop ibus-gtk4 intel-media-driver iptables iptables-services jq kate libavcodec-{free,freeworld} libdvdcss
-    libffi-devel libfreeaptx libfreeaptx-tools libgcab1 librabbitmq librabbitmq-tools librist libsodium libsodium-devel libtool libva-intel-driver libvdpau libvdpau-va-gl libXext llvm16-libs lpcnetfreedv lsd make mbedtls meld mesa-{libGL,libGLU,libd3d}-devel
+    libffi-devel libfreeaptx libfreeaptx-tools libgcab1 librabbitmq librabbitmq-tools librist libsodium libsodium-devel libtool libva-intel-driver libvdpau libvdpau-va-gl libXext llvm16-libs lpcnetfreedv lsd make materia-kde-yakuake mbedtls meld mesa-{libGL,libGLU,libd3d}-devel
     mesa-filesystem mesa-libEGL mesa-libGL mesa-libGL{w,U} mesa-libglapi mesa-libO{penCL,SMesa} mesa-va-drivers mesa-vulkan-drivers mozilla-ublock-origin mpg123 nano neofetch neovim neovim-qt net-snmp net-tools nftables openssh openssh-{client,server} ostree 
     p7zip p7zip-gui p7zip-plugins PackageKit pandoc pip pipewire-codec-aptx pkg-config plasma-discover-{flatpak,packagekit,snap} plasma-firewall-ufw plocate pluginskdegraphics-thumbnailers powertop pulseeffects python3 python3-pip python3-setproctitle qrencode 
     rclone rclone-browser ripgrep rsync rygel sassc screen socat sopenssl-devel sshpass sxiv tar terminator tlp tlp-rdw tlpi tumbler tumbler-extra ufw ufw-kde ugrep un{zip,rar} unrar-free variety vim virt-manager wget wsdd xclip xorg-x11-fonts-ISO8859-1-100dpi 
@@ -31,6 +31,7 @@ software_packages=(
 
 software_explanations=(
     "acl                               Access control list utilities for file permissions management."
+    "arc-kde-yakuake                   Arc-KDE Yakuake theme"
     "aria2                             High speed download utility"
     "attr                              Tools for managing extended attributes on filesystems."
     "automake                          A GNU tool for automatically creating Makefiles"
@@ -120,6 +121,7 @@ software_explanations=(
     "lpcnetfreedv                      LPCNet for FreeDV"
     "lsd                               ls command with a lot of pretty colors and some other stuff"
     "make                              A GNU tool which simplifies the build process for users"
+    "materia-kde-yakuake               Materia-KDE Yakuake theme"
     "mbedtls                           Light-weight cryptographic and SSL/TLS library"
     "meld                              graphical tool to diff and merge files"
     "mesa-filesystem                   Mesa driver filesystem"
@@ -219,7 +221,7 @@ fi
 
 # Install some software:
 software_packages5=(
-    blender boomaga digfikam flameshot gimp gimp-help gimp-data-extras inkscape krita neochat rhythmbox scribus scribus-doc scribus-template shotwell simplescreenrecorder syncthing transmission transmission-{remote-gtk,gtk,qt} uget vlc
+    blender boomaga digfikam flameshot gimp gimp-help gimp-data-extras inkscape krita neochat rhythmbox scribus scribus-doc scribus-template shotwell simplescreenrecorder syncthing transmission transmission-{remote-gtk,gtk,qt} uget vlc yakuake
     )
 
 software_explanations5=(
@@ -244,6 +246,7 @@ software_explanations5=(
     "transmission-{remote-gtk,gtk,qt}  Lightweight BitTorrent Client (GTK+ & QT Interface)"
     "uget                              easy-to-use download manager written in GTK+"
     "vlc                               Multimedia player and streaming server."
+    "yakuake                           A drop-down terminal emulator"
 )
 
 echo "The following packages will be installed:"
