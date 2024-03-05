@@ -23,9 +23,10 @@ software_packages=(
     fancontrol-{gui,gui-kcm,gui-plasmoid} fastfetch fd-find ffmpeg ffmpeg-libs ffmpegthumbnailer ffmpegthumbs figlet flatpak font-manager fortune-mod git gnome-font-viewer gnupg2 google-noto-emoji-color-fonts grep grub-customizer gstreamer1.0-{libav,vaapi}
     gstreamer1.0-plugins-{bad-free,bad-free-extras,good,good-extras,ugly,ugly-free} gtk-murrine-engine gtk{2,3}-immodule-xim gtk2-engines haveged htop ibus-gtk4 intel-media-driver iptables iptables-services jq kate libavcodec-{free,freeworld} libdvdcss
     libffi-devel libfreeaptx libfreeaptx-tools libgcab1 librabbitmq librabbitmq-tools librist libsodium libsodium-devel libtool libva-intel-driver libvdpau libvdpau-va-gl libXext llvm16-libs lpcnetfreedv lsd make mbedtls meld mesa-{libGL,libGLU,libd3d}-devel
-    mesa-filesystem mesa-libEGL mesa-libGL mesa-libGL{w,U} mesa-libglapi mesa-libO{penCL,SMesa} mesa-va-drivers mesa-vulkan-drivers mozilla-ublock-origin mpg123 nano neofetch net-snmp net-tools nftables openssh openssh-{client,server} ostree p7zip p7zip-gui
-    p7zip-plugins PackageKit pandoc pip pipewire-codec-aptx pkg-config plasma-discover-{flatpak,packagekit,snap} plocate pluginskdegraphics-thumbnailers powertop pulseeffects python3 python3-pip python3-setproctitle qrencode rclone rclone-browser ripgrep
-    rsync rygel sassc screen socat sopenssl-devel sshpass sxiv tar terminator tlp tlp-rdw tlpi tumbler tumbler-extra ufw ugrep un{zip,rar} unrar-free variety vim virt-manager wget wsdd xclip xorg-x11-fonts-ISO8859-1-100dpi zip zstd
+    mesa-filesystem mesa-libEGL mesa-libGL mesa-libGL{w,U} mesa-libglapi mesa-libO{penCL,SMesa} mesa-va-drivers mesa-vulkan-drivers mozilla-ublock-origin mpg123 nano neofetch neovim neovim-qt net-snmp net-tools nftables openssh openssh-{client,server} ostree 
+    p7zip p7zip-gui p7zip-plugins PackageKit pandoc pip pipewire-codec-aptx pkg-config plasma-discover-{flatpak,packagekit,snap} plasma-firewall-ufw plocate pluginskdegraphics-thumbnailers powertop pulseeffects python3 python3-pip python3-setproctitle qrencode 
+    rclone rclone-browser ripgrep rsync rygel sassc screen socat sopenssl-devel sshpass sxiv tar terminator tlp tlp-rdw tlpi tumbler tumbler-extra ufw ufw-kde ugrep un{zip,rar} unrar-free variety vim virt-manager wget wsdd xclip xorg-x11-fonts-ISO8859-1-100dpi 
+    zip zstd
     )
 
 software_explanations=(
@@ -108,9 +109,9 @@ software_explanations=(
 	"librabbitmq                       Client library for AMQP"
 	"librabbitmq-tools                 Example tools built using the librabbitmq package"
 	"librist                           Library for Reliable Internet Stream Transport (RIST) protocol"
-    "libsodium
-    "libsodium-devel
-    "libtool
+    "libsodium                         The Sodium crypto library"
+    "libsodium-devel                   Development files for libsodium"
+    "libtool                           The GNU Portable Library Tool"
     "libva-intel-driver                HW video decode support for Intel integrated graphics"
     "libvdpau                          Wrapper library for the Video Decode and Presentation API"
     "libvdpau-va-gl                    VDPAU driver with OpenGL/VAAPI back-end"
@@ -118,7 +119,7 @@ software_explanations=(
     "llvm16-libs                       LLVM shared libraries"
     "lpcnetfreedv                      LPCNet for FreeDV"
     "lsd                               ls command with a lot of pretty colors and some other stuff"
-    "make
+    "make                              A GNU tool which simplifies the build process for users"
     "mbedtls                           Light-weight cryptographic and SSL/TLS library"
     "meld                              graphical tool to diff and merge files"
     "mesa-filesystem                   Mesa driver filesystem"
@@ -138,9 +139,11 @@ software_explanations=(
     "mpg123                            Real time MPEG 1.0/2.0/2.5 audio player/decoder for layers 1, 2 and 3"
     "nano                              A small text editor"
     "neofetch                          Fast, highly customizable system info script."
+    "neovim                            Vim-fork focused on extensibility and agility"
+    "neovim-qt                         Qt GUI for Neovim"
     "net-snmp                          A collection of SNMP (Simple Network Management Protocol) tools and libraries"
-    "net-tools
-    "nftables
+    "net-tools                         Basic networking tools"
+    "nftables                          Netfilter Tables userspace utilites"
     "openssh                           An open source implementation of SSH protocol version 2"
     "openssh-clients                   An open source SSH client applications"
     "openssh-server                    An open source SSH server daemon"
@@ -152,25 +155,26 @@ software_explanations=(
     "PackageKit                        Package management service"
     "pandoc                            general markup converter"
     "pipewire-codec-aptx               PipeWire Bluetooth aptX codec plugin"
-    "pkg-config
+    "pkgconf-pkg-config                pkgconf shim to provide /usr/bin/pkg-config"
     "plasma-discover-flatpak           Plasma Discover flatpak support"
     "plasma-discover-packagekit        Plasma Discover PackageKit support"
     "plasma-discover-snap              Plasma Discover snap support"
+    "plasma-firewall-ufw               UFW backend for Plasma Firewall"
     "plocate                           Fast filesystem search tool."
     "powertop                          diagnose issues with power consumption and management"
     "pulseeffects                      advanced audio manipulation tools"
     "python3                           General-purpose, high-level programming language supporting multiple programming paradigms"
     "python3-pip                       A tool for installing and managing Python3 packages"
     "python3-setproctitle              Allow customization of the process title."
-    "qrencode
+    "qrencode                          Generate QR 2D barcodes"
     "rclone                            rsync for commercial cloud storage"
     "rclone-browser                    Simple cross platform GUI for rclone"
     "ripgrep                           recursively searches your current directory for a regex"
     "rsync                             A program for synchronizing files over a network"
     "rygel                             GNOME UPnP/DLNA services"
     "sassc                             Wrapper around libsass to compile CSS stylesheet"
-    "screen
-    "socat
+    "screen                            A screen manager that supports multiple logins on one terminal"
+    "socat                             Bidirectional data relay between two data channels ('netcat++')"
     "sshpass                           Non-interactive SSH authentication utility"
     "sxiv                              simple X image viewer"
     "tar                               GNU file archiving program"
@@ -183,10 +187,11 @@ software_explanations=(
     "ugrep                             faster grep with an interactive query GUI"
     "unrar                             Extract files from RAR archives."
     "unrar-free                        Free software version of the non-free unrar utility"
-    "ufw
+    "ufw                               Uncomplicated Firewall"
+    "ufw-kde                           UFW control module for KDE"
     "unzip                             A utility for unpacking zip files"
     "variety                           Wallpaper changer, downloader and manager"
-    "vim
+    "vim                               highly configurable text editor built to make creating and changing any kind of text very efficient"
     "virt-manager                      Desktop tool for managing virtual machines via libvirt"
     "wget                              A utility for retrieving files using the HTTP or FTP protocols"
     "wsdd                              Python Web Services Discovery Daemon, Windows Net Browsing"
@@ -211,9 +216,6 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 else
     echo "Package installation skipped."
 fi
-
-dnf copr enable jerrycasiano/FontManager
-dnf install font-manager
 
 # Install some software:
 software_packages5=(
@@ -260,33 +262,34 @@ else
     echo "Package installation skipped."
 fi
 
-#Install gum : A tool for glamorous shell scripts. https://github.com/charmbracelet/gum
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
-echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
-sudo apt update && sudo apt install gum
+# Install gum : A tool for glamorous shell scripts. https://github.com/charmbracelet/gum
+# sudo mkdir -p /etc/apt/keyrings
+# curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
+#echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
+# sudo apt update && sudo apt install gum
 
 sudo apt install earlyoom
 sudo systemctl enable --now earlyoom
 
 # Support for additional file systems:
 filesystem_packages=(
-    btrfs-progs exfatprogs f2fs-tools hfsutils hfsplus-tools jfsutils lvm2 nilfs-utils ntfs-3g udftools xfsprogs disktype
+    apfs-fuse btrfs-progs exfatprogs f2fs-tools hfsutils hfsplus-tools jfsutils lvm2 nilfs-utils ntfs-3g udftools xfsprogs disktype
 )
 
 filesystem_explanations=(
+    "apfs-fuse                A read-only FUSE driver for Apple's APFS"
     "btrfs-progs              Tools for managing Btrfs file systems."
+    "disktype                 Detects the content format of a disk or disk image."
     "exfatprogs               Utilities for exFAT file system."
     "f2fs-tools               Utilities for Flash-Friendly File System (F2FS)."
-    "hfsutils                 Tools for reading and writing Macintosh HFS volumes"
     "hfsplus-tools            Tools to create/check Apple HFS+ filesystems"
+    "hfsutils                 Tools for reading and writing Macintosh HFS volumes"
     "jfsutils                 Utilities for JFS (Journaled File System)."
     "lvm2                     Logical Volume Manager 2 utilities."
     "nilfs-utils              Utilities for managing NILFS v2 filesystems"
     "ntfs-3g                  Linux NTFS userspace driver"
     "udftools                 Tools for UDF (Universal Disk Format) file system."
     "xfsprogs                 Tools for managing XFS file systems."
-    "disktype                 Detects the content format of a disk or disk image."
 )
 
 echo "The following packages will be installed:"
