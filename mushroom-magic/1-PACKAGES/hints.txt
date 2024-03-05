@@ -50,8 +50,8 @@ software_explanations=(
     "dconf-editor                      Configuration editor for dconf"
     "dialog                            A utility for creating TTY dialog boxes"
     "direnv                            Utility to set directory specific environment variables"
-    "dnf-plugins-core
-    "dnf-utils
+    "dnf-plugins-core                  Core Plugins for DNF"
+    "dnf-utils                         Yum-utils CLI compatibility layer"
     "dnf5                              Command-line package manager"
     "dnf5-plugins                      Plugins for dnf5"
     "dnfdragora                        DNF package-manager based on libYui abstraction"
@@ -76,7 +76,7 @@ software_explanations=(
     "git                               Fast Version Control System"
     "gnome-font-viewer                 Utility for previewing fonts for GNOME"
     "google-noto-emoji-color-fonts     Google “Noto Color Emoji” colored emoji font"
-    "gnupg2
+    "gnupg2                            Utility for secure communication and data storage"
     "grep                              GNU grep. egrep and fgrep"
     "grub-customizer                   GUI to configure GRUB2 and BURG"
     "gstreamer1-libav                  GStreamer plugins for the libav codec library."
@@ -89,12 +89,12 @@ software_explanations=(
     "gtk2-immodule-xim                 XIM support for GTK+"
     "gtk3                              GTK+ graphical user interface library"
 	"gtk3-immodule-xim                 XIM support for GTK+"
-    "haveged
+    "haveged                           A Linux entropy source using the HAVEGE algorithm
     "ibus-gtk4                         IBus IM module for GTK4"
     "intel-media-driver                The Intel Media Driver for VAAPI"
-    "iptables
-    "iptables-services
-    "jq
+    "iptables                          allows a sys admin to configure the IP packet filter rules of the Linux kernel firewall
+    "iptables-services                 iptables and ip6tables services for iptables"
+    "jq                                Command-line JSON processor"
     "kate                              Advanced Text Editor"
     "kate-plugins                      Kate plugins"
     "kdegraphics-thumbnailers          Graphics file format thumbnailers for KDE."
