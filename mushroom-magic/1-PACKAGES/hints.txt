@@ -7,18 +7,122 @@
 
 #   《˘ ͜ʖ ˘》
 #
-#  ██╗   ██╗██╗  ████████╗██████╗  █████╗ ███╗   ███╗ █████╗ ██████╗ ██╗███╗   ██╗███████╗    ██████╗ ██╗  ██╗ ██████╗ ███████╗
-#  ██║   ██║██║  ╚══██╔══╝██╔══██╗██╔══██╗████╗ ████║██╔══██╗██╔══██╗██║████╗  ██║██╔════╝    ██╔══██╗██║ ██╔╝██╔════╝ ██╔════╝
-#  ██║   ██║██║     ██║   ██████╔╝███████║██╔████╔██║███████║██████╔╝██║██╔██╗ ██║█████╗      ██████╔╝█████╔╝ ██║  ███╗███████╗
-#  ██║   ██║██║     ██║   ██╔══██╗██╔══██║██║╚██╔╝██║██╔══██║██╔══██╗██║██║╚██╗██║██╔══╝      ██╔═══╝ ██╔═██╗ ██║   ██║╚════██║
-#  ╚██████╔╝███████╗██║   ██║  ██║██║  ██║██║ ╚═╝ ██║██║  ██║██║  ██║██║██║ ╚████║███████╗    ██║     ██║  ██╗╚██████╔╝███████║
-#   ╚═════╝ ╚══════╝╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝    ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+#  ███████╗ ██████╗ ███████╗████████╗██╗    ██╗ █████╗ ██████╗ ███████╗    ██████╗ ██╗  ██╗ ██████╗ ███████╗
+#  ██╔════╝██╔═══██╗██╔════╝╚══██╔══╝██║    ██║██╔══██╗██╔══██╗██╔════╝    ██╔══██╗██║ ██╔╝██╔════╝ ██╔════╝
+#  ███████╗██║   ██║█████╗     ██║   ██║ █╗ ██║███████║██████╔╝█████╗      ██████╔╝█████╔╝ ██║  ███╗███████╗
+#  ╚════██║██║   ██║██╔══╝     ██║   ██║███╗██║██╔══██║██╔══██╗██╔══╝      ██╔═══╝ ██╔═██╗ ██║   ██║╚════██║
+#  ███████║╚██████╔╝██║        ██║   ╚███╔███╔╝██║  ██║██║  ██║███████╗    ██║     ██║  ██╗╚██████╔╝███████║
+#  ╚══════╝ ╚═════╝ ╚═╝        ╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 #
-# https://patorjk.com/software/taag/#p=display&c=bash&f=ANSI%20Shadow&t=Ultramarine%20Pkgs
+# https://patorjk.com/software/taag/#p=display&c=bash&f=ANSI%20Shadow&t=Software%20Pkgs
 
 
 # Install some software:
-software_packages=(
+
+# Tolga Erok
+# for
+# Brian
+# 4/3/2024
+
+# Function to install packages using apt package manager (Debian)
+install_debian_packages() {
+    local software_packages=("$@")
+    echo "The following packages will be installed:"
+    for ((i = 0; i < ${#software_packages[@]}; i++)); do
+        echo "- ${software_packages[i]}"
+        echo "Explanation: ${software_explanations[i]}"
+        sleep 3
+    done
+
+    read -p "Do you want to proceed with the installation? (y/n): " choice
+
+    if [[ $choice =~ ^[Yy]$ ]]; then
+        echo "Installing the packages using apt..."
+        sudo apt install -y --install-recommends "${software_packages[@]}"
+        echo "Package installation completed."
+    else
+        echo "Package installation skipped."
+    fi
+}
+
+# Function to install packages using dnf package manager (Fedora)
+install_fedora_packages() {
+    local software_packages=("$@")
+    echo "The following packages will be installed:"
+    for ((i = 0; i < ${#software_packages[@]}; i++)); do
+        echo "- ${software_packages[i]}"
+        echo "Explanation: ${software_explanations[i]}"
+        sleep 3
+    done
+
+    read -p "Do you want to proceed with the installation? (y/n): " choice
+
+    if [[ $choice =~ ^[Yy]$ ]]; then
+        echo "Installing the packages using dnf..."
+        sudo dnf install -y "${software_packages[@]}"
+        echo "Package installation completed."
+    else
+        echo "Package installation skipped."
+    fi
+}
+
+# Function to install packages using eopkg package manager (Solus)
+install_solus_packages() {
+    local software_packages=("$@")
+    echo "The following packages will be installed:"
+    for ((i = 0; i < ${#software_packages[@]}; i++)); do
+        echo "- ${software_packages[i]}"
+        echo "Explanation: ${software_explanations[i]}"
+        sleep 3
+    done
+
+    read -p "Do you want to proceed with the installation? (y/n): " choice
+
+    if [[ $choice =~ ^[Yy]$ ]]; then
+        echo "Installing the packages using eopkg..."
+        sudo eopkg install -y "${software_packages[@]}"
+        echo "Package installation completed."
+    else
+        echo "Package installation skipped."
+    fi
+}
+# Check distribution type (Debian, Fedora or Solus) and call respective function from above
+if [ -f /etc/debian_version ]; then
+    echo "Debian-based distribution detected."
+    install_debian_packages "${software_packages[@]}"
+elif [ -f /etc/redhat-release ]; then
+    echo "Fedora-based distribution detected."
+    install_fedora_packages "${software_packages[@]}"
+elif [ -f /usr/bin/eopkg ]; then
+    echo "Solus-based distribution detected."
+    install_solus_packages "${software_packages[@]}"
+    else
+    echo "Unsupported distribution."
+fi
+
+# Function to install packages using apt package manager (debian)
+install_debian_packages() {
+    local software_packages=("$@")
+    echo "The following packages will be installed:"
+    for ((i = 0; i < ${#software_packages[@]}; i++)); do
+        echo "- ${software_packages[i]}"
+        echo "Explanation: ${software_explanations[i]}"
+        sleep 3
+    done
+
+    read -p "Do you want to proceed with the installation? (y/n): " choice
+
+    if [[ $choice =~ ^[Yy]$ ]]; then
+        echo "Installing the packages using apt..."
+        sudo apt install -y --install-recommends "${software_packages[@]}"
+        echo "Package installation completed."
+    else
+        echo "Package installation skipped."
+    fi
+}
+
+# Software packages to be installed in an array/index
+declare -a software_packages=(
     acl arc-kde-yakuake aria2 attr autoconf automake bash-completion bc binutils btop busybox ca-certificates cifs-utils cjson codec2 cowsay crontabs curl dbus-glib dconf-editor dialog direnv dnf-plugins-core dnf-utils dnsutils duf earlyoom easyeffects espeak espeak-ng
     fancontrol-{gui,gui-kcm,gui-plasmoid} fastfetch fd-find ffmpeg ffmpeg-libs ffmpegthumbnailer ffmpegthumbs figlet flatpak font-manager fortune-mod git gnome-font-viewer gnupg2 google-noto-emoji-color-fonts grep grub-customizer gstreamer1.0-{libav,vaapi}
     gstreamer1.0-plugins-{bad-free,bad-free-extras,good,good-extras,ugly,ugly-free} gtk-murrine-engine gtk{2,3}-immodule-xim gtk2-engines haveged htop ibus-gtk4 intel-media-driver iptables iptables-services jq kate libavcodec-{free,freeworld} libdvdcss
@@ -29,7 +133,8 @@ software_packages=(
     zip zram zram-generator zram-generator-defaults zstd
     )
 
-software_explanations=(
+# Explanations..tried my best to explain them
+declare -a software_explanations=(
     "acl                               Access control list utilities for file permissions management."
     "arc-kde-yakuake                   Arc-KDE Yakuake theme"
     "aria2                             High speed download utility"
@@ -206,21 +311,21 @@ software_explanations=(
     "zstd                              compression library"
 )
 
-echo "The following packages will be installed:"
-for ((i = 0; i < ${#software_packages[@]}; i++)); do
-    echo "- ${software_explanations[i]}"
-done
-
-echo
-read -p "Do you want to proceed with the installation? (y/n): " choice
-
-if [[ $choice =~ ^[Yy]$ ]]; then
-    echo "Installing the packages..."
-    sudo dnf install -y "${software_packages[@]}"
-    echo "Package installation completed."
-else
-    echo "Package installation skipped."
-fi
+#echo "The following packages will be installed:"
+#for ((i = 0; i < ${#software_packages[@]}; i++)); do
+#    echo "- ${software_explanations[i]}"
+#done
+#
+#echo
+#read -p "Do you want to proceed with the installation? (y/n): " choice
+#
+#if [[ $choice =~ ^[Yy]$ ]]; then
+#    echo "Installing the packages..."
+#    sudo dnf install -y "${software_packages[@]}"
+#    echo "Package installation completed."
+#else
+#    echo "Package installation skipped."
+#fi
 
 # Install some software:
 software_packages5=(

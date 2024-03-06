@@ -7,7 +7,7 @@
 
 # Dnf or apt
 
-# Function to install packages using apt package manager (debian)
+# Function to install packages using apt package manager (Debian)
 install_debian_packages() {
     local software_packages=("$@")
     echo "The following packages will be installed:"
@@ -28,7 +28,7 @@ install_debian_packages() {
     fi
 }
 
-# Function to install packages using dnf package manager (fedora)
+# Function to install packages using dnf package manager (Fedora)
 install_fedora_packages() {
     local software_packages=("$@")
     echo "The following packages will be installed:"
@@ -49,14 +49,37 @@ install_fedora_packages() {
     fi
 }
 
-# Check distribution type (debian or fedora) and call respective function from above
+# Function to install packages using eopkg package manager (Solus)
+install_solus_packages() {
+    local software_packages=("$@")
+    echo "The following packages will be installed:"
+    for ((i = 0; i < ${#software_packages[@]}; i++)); do
+        echo "- ${software_packages[i]}"
+        echo "Explanation: ${software_explanations[i]}"
+        sleep 3
+    done
+
+    read -p "Do you want to proceed with the installation? (y/n): " choice
+
+    if [[ $choice =~ ^[Yy]$ ]]; then
+        echo "Installing the packages using eopkg..."
+        sudo eopkg install -y "${software_packages[@]}"
+        echo "Package installation completed."
+    else
+        echo "Package installation skipped."
+    fi
+}
+# Check distribution type (Debian, Fedora or Solus) and call respective function from above
 if [ -f /etc/debian_version ]; then
     echo "Debian-based distribution detected."
     install_debian_packages "${software_packages[@]}"
 elif [ -f /etc/redhat-release ]; then
     echo "Fedora-based distribution detected."
     install_fedora_packages "${software_packages[@]}"
-else
+elif [ -f /usr/bin/eopkg ]; then
+    echo "Solus-based distribution detected."
+    install_solus_packages "${software_packages[@]}"
+    else
     echo "Unsupported distribution."
 fi
 
