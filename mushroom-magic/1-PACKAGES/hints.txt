@@ -25,7 +25,7 @@ software_packages=(
     libffi-devel libfreeaptx libfreeaptx-tools libgcab1 librabbitmq librabbitmq-tools librist libsodium libsodium-devel libtool libva-intel-driver libvdpau libvdpau-va-gl libXext llvm16-libs lpcnetfreedv lsd make materia-kde-yakuake mbedtls meld mesa-{libGL,libGLU,libd3d}-devel
     mesa-filesystem mesa-libEGL mesa-libGL mesa-libGL{w,U} mesa-libglapi mesa-libO{penCL,SMesa} mesa-va-drivers mesa-vulkan-drivers mozilla-ublock-origin mpg123 nano neofetch neovim neovim-qt net-snmp net-tools nftables openssh openssh-{client,server} ostree 
     p7zip p7zip-gui p7zip-plugins PackageKit pandoc pip pipewire-codec-aptx pkg-config plasma-discover-{flatpak,packagekit,snap} plasma-firewall-ufw plocate pluginskdegraphics-thumbnailers powertop pulseeffects python3 python3-pip python3-setproctitle qrencode 
-    rclone rclone-browser ripgrep rsync rygel sassc screen socat sopenssl-devel sshpass sxiv tar terminator tlp tlp-rdw tlpi tumbler tumbler-extra ufw ufw-kde ugrep un{zip,rar} unrar-free variety vim virt-manager wget wsdd xclip xorg-x11-fonts-ISO8859-1-100dpi 
+    rclone rclone-browser ripgrep rsync rygel sassc screen socat openssl-devel sshpass sxiv tar terminator tlp tlp-rdw tlpi tumbler tumbler-extra ufw ufw-kde ugrep un{zip,rar} unrar-free variety vim virt-manager wget wsdd xclip xorg-x11-fonts-ISO8859-1-100dpi
     zip zstd
     )
 
@@ -276,7 +276,7 @@ sudo systemctl enable --now earlyoom
 
 # Support for additional file systems:
 filesystem_packages=(
-    apfs-fuse btrfs-progs exfatprogs f2fs-tools hfsutils hfsplus-tools jfsutils lvm2 nilfs-utils ntfs-3g udftools xfsprogs disktype
+    apfs-fuse btrfs-progs disktype exfatprogs f2fs-tools fuse-sshfs hfsutils hfsplus-tools jfsutils lvm2 nilfs-utils ntfs-3g udftools xfsprogs
 )
 
 filesystem_explanations=(
@@ -285,6 +285,7 @@ filesystem_explanations=(
     "disktype                 Detects the content format of a disk or disk image."
     "exfatprogs               Utilities for exFAT file system."
     "f2fs-tools               Utilities for Flash-Friendly File System (F2FS)."
+    "fuse-sshfs               FUSE-Filesystem to access remote filesystems via SSH"
     "hfsplus-tools            Tools to create/check Apple HFS+ filesystems"
     "hfsutils                 Tools for reading and writing Macintosh HFS volumes"
     "jfsutils                 Utilities for JFS (Journaled File System)."
@@ -338,82 +339,6 @@ sudo fc-cache -vf
 # Removing zip Files
 rm ./FiraCode.zip ./Meslo.zip ./WPS-FONTS.zip
 
-####################################################
-
-install_apps() {
-	display_message "[${GREEN}✔${NC}]  Installing afew personal apps..."
-
-	remove_libreoffice
-
-	sudo dnf -y up
-	sudo dnf -y autoremove
-	sudo dnf -y clean all
-
-	# Enable trim support
-	sudo systemctl enable fstrim.timer
-#################################################
-	# Install Apps
-
-
-
-	# Audio
-	[ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
-	[ -f /usr/bin/pulseeffects ] && [ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
------------------------------------------------
-
-
-	# NOT SURE ABOUT THIS sudo dnf install -y sshfs fuse-sshfs
-
-	
-
-
-	# Configure fortune
-	# If you want to display a specific fortune file or category, you can use the -e option followed by the file or category name. For example:
-	# fortune -e art ascii-art bofh-excuses computers cookie definitions disclaimer drugs education fortunes humorists kernelnewbies knghtbrd law linux literature miscellaneous news people riddles science
-	# or to see a list:
-	# fortune -f
-
-
-	# Execute rygel to start DLNA sharing
-	/usr/bin/rygel-preferences
-
-	# Install profile-sync: it to manage browser profile(s) in tmpfs and to periodically sync back to the physical disc (HDD/SSD)
-	sudo dnf install profile-sync-daemon
-	/usr/bin/profile-sync-daemon preview
-	# sudo dnf remove profile-sync-daemon
-	# psd profile located in $HOME/.config/psd/psd.conf
-
--------------------------------------------
-
-	## Networking packages
-	sudo dnf -y install 
-
-
-	sudo dnf swap -y libavcodec-free libavcodec-freeworld --allowerasing
-	sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
-
-	display_message "[${GREEN}✔${NC}]  Installing GUM"
-
-	echo '[charm]
-name=Charm
-baseurl=https://repo.charm.sh/yum/
-enabled=1
-gpgcheck=1
-gpgkey=https://repo.charm.sh/yum/gpg.key' | sudo tee /etc/yum.repos.d/charm.repo
-	sudo yum install gum -y
-
-	gum spin --spinner dot --title "GUM installed" -- sleep 2
-
-	## Make a backup of the original sysctl.conf file
-	display_message "[${GREEN}✔${NC}]  Tweaking network settings"
-
-	cp $SYS_PATH /etc/sysctl.conf.bak
-
-	echo
-	yellow_msg 'Default sysctl.conf file Saved. Directory: /etc/sysctl.conf.bak'
-	echo
-	gum spin --spinner dot --title "Stand-by..." -- sleep 1
-##############################################################
 	# Install some fonts
 	display_message "[${GREEN}✔${NC}]  Installing some fonts"
 
@@ -463,11 +388,68 @@ gpgkey=https://repo.charm.sh/yum/gpg.key' | sudo tee /etc/yum.repos.d/charm.repo
 	rm ./WPS-FONTS.zip
 	sudo fc-cache -f -v
 
-	sudo dnf install fontconfig-font-replacements -y --skip-broken && sudo dnf install fontconfig-enhanced-defaults -y --skip-broken
+	# sudo dnf install fontconfig-font-replacements -y --skip-broken && sudo dnf install fontconfig-enhanced-defaults -y --skip-broken
 
-	sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/tolgaerok/tolga-scripts/main/Fedora39/San-Francisco-family/San-Francisco-family.sh)"
+	# sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/tolgaerok/tolga-scripts/main/Fedora39/San-Francisco-family/San-Francisco-family.sh)"
 
-	###################################################
+####################################################
+
+	# Enable trim support
+	sudo systemctl enable fstrim.timer
+#################################################
+	# Install Apps
+
+
+
+	# Audio
+	[ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
+	[ -f /usr/bin/pulseeffects ] && [ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
+-----------------------------------------------
+
+
+
+
+	# Configure fortune
+	# If you want to display a specific fortune file or category, you can use the -e option followed by the file or category name. For example:
+	# fortune -e art ascii-art bofh-excuses computers cookie definitions disclaimer drugs education fortunes humorists kernelnewbies knghtbrd law linux literature miscellaneous news people riddles science
+	# or to see a list:
+	# fortune -f
+
+
+	# Execute rygel to start DLNA sharing
+	/usr/bin/rygel-preferences
+
+	# Install profile-sync: it to manage browser profile(s) in tmpfs and to periodically sync back to the physical disc (HDD/SSD)
+	sudo dnf install profile-sync-daemon
+	/usr/bin/profile-sync-daemon preview
+	# sudo dnf remove profile-sync-daemon
+	# psd profile located in $HOME/.config/psd/psd.conf
+
+-------------------------------------------
+
+	display_message "[${GREEN}✔${NC}]  Installing GUM"
+
+	echo '[charm]
+name=Charm
+baseurl=https://repo.charm.sh/yum/
+enabled=1
+gpgcheck=1
+gpgkey=https://repo.charm.sh/yum/gpg.key' | sudo tee /etc/yum.repos.d/charm.repo
+	sudo yum install gum -y
+
+	gum spin --spinner dot --title "GUM installed" -- sleep 2
+
+	## Make a backup of the original sysctl.conf file
+	display_message "[${GREEN}✔${NC}]  Tweaking network settings"
+
+	cp $SYS_PATH /etc/sysctl.conf.bak
+
+	echo
+	yellow_msg 'Default sysctl.conf file Saved. Directory: /etc/sysctl.conf.bak'
+	echo
+	gum spin --spinner dot --title "Stand-by..." -- sleep 1
+##############################################################
+
 # Function to remove residual configuration files
 function remove_residual_config_files() {
     packages=$(dpkg -l | awk '/^rc/ { print $2 }')
@@ -490,8 +472,9 @@ echo -e "\n\n----------------------------------------------"
 echo -e "|     Let's clean up                         |"
 echo -e "----------------------------------------------\n\n"
 sudo update-grub
-sudo dnf autoremove -y
-sudo dnf clean -y
+sudo dnf -y up
+sudo dnf -y autoremove
+sudo dnf -y clean all
 clear_journal_logs
 remove_residual_config_files
 
