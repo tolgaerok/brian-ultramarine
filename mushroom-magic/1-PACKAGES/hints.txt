@@ -26,7 +26,7 @@ software_packages=(
     mesa-filesystem mesa-libEGL mesa-libGL mesa-libGL{w,U} mesa-libglapi mesa-libO{penCL,SMesa} mesa-va-drivers mesa-vulkan-drivers mozilla-ublock-origin mpg123 nano neofetch neovim neovim-qt net-snmp net-tools nftables openssh openssh-{client,server} ostree 
     p7zip p7zip-gui p7zip-plugins PackageKit pandoc pip pipewire-codec-aptx pkg-config plasma-discover-{flatpak,packagekit,snap} plasma-firewall-ufw plocate pluginskdegraphics-thumbnailers powertop pulseeffects python3 python3-pip python3-setproctitle qrencode 
     rclone rclone-browser ripgrep rsync rygel sassc screen socat openssl-devel sshpass sxiv tar terminator tlp tlp-rdw tlpi tumbler tumbler-extra ufw ufw-kde ugrep un{zip,rar} unrar-free variety vim virt-manager wget wsdd xclip xorg-x11-fonts-ISO8859-1-100dpi
-    zip zstd
+    zip zram zram-generator zram-generator-defaults zstd
     )
 
 software_explanations=(
@@ -200,6 +200,9 @@ software_explanations=(
     "xclip                             Command line clipboard grabber"
     "xorg-x11-fonts-ISO8859-1-100dpi   A set of 100dpi ISO-8859-1 fonts for X"
     "zip                               A file compression and packaging utility compatible with PKZIP"
+    "zram                              ZRAM for swap config and services for Fedora"
+    "zram-generator                    Systemd unit generator for zram swap devices"
+    "zram-generator-defaults           Default configuration for zram-generator"
     "zstd                              compression library"
 )
 
@@ -213,7 +216,7 @@ read -p "Do you want to proceed with the installation? (y/n): " choice
 
 if [[ $choice =~ ^[Yy]$ ]]; then
     echo "Installing the packages..."
-    sudo apt install -y --install-recommends "${software_packages[@]}"
+    sudo dnf install -y "${software_packages[@]}"
     echo "Package installation completed."
 else
     echo "Package installation skipped."
@@ -221,10 +224,13 @@ fi
 
 # Install some software:
 software_packages5=(
-    blender boomaga digfikam flameshot gimp gimp-help gimp-data-extras inkscape krita neochat rhythmbox scribus scribus-doc scribus-template shotwell simplescreenrecorder syncthing transmission transmission-{remote-gtk,gtk,qt} uget vlc yakuake
+    akonadi akonadi-import-wizard akonadi-calendar-toolsblender boomaga digfikam flameshot gimp gimp-help gimp-data-extras inkscape kdepim kdepim-addons krita neochat rhythmbox scribus scribus-doc scribus-template shotwell simplescreenrecorder syncthing transmission transmission-{remote-gtk,gtk,qt} uget vlc yakuake
     )
 
 software_explanations5=(
+    "akonadi
+    "akonadi-import-wizard
+    "akonadi-calendar-tools
     "blender                           Very fast and versatile 3D modeller/renderer"
     "boomaga                           virtual printer for viewing a document before printing"
     "digikam                           A digital camera accessing & photo management application"
@@ -233,6 +239,8 @@ software_explanations5=(
     "gimp-help                         Documentation for GIMP (English)"
     "gimp-data-extras                  Extra files for GIMP"
     "inkscape                          vector-based drawing program"
+    "kdepim                            KDE Personal Information Metapackage"
+    "kdepim-addons                     Additional plugins for KDE PIM applications"
     "krita                             pixel-based image manipulation program"
     "neochat                           Matrix client for desktop and mobile made by KDE"
     "rhythmbox                         Music player and organizer for GNOME."
@@ -259,7 +267,7 @@ read -p "Do you want to proceed with the installation? (y/n): " choice
 
 if [[ $choice =~ ^[Yy]$ ]]; then
     echo "Installing the packages..."
-    sudo apt install -y --install-recommends "${software_packages5[@]}"
+    sudo dnf install -y "${software_packages5[@]}"
     echo "Package installation completed."
 else
     echo "Package installation skipped."
@@ -306,20 +314,13 @@ read -p "Do you want to proceed with the installation? (y/n): " choice
 
 if [[ $choice =~ ^[Yy]$ ]]; then
     echo "Installing the packages..."
-    sudo apt install -y --install-recommends "${filesystem_packages[@]}"
+    sudo dnf install -y "${filesystem_packages[@]}"
     echo "Package installation completed."
 else
     echo "Package installation skipped."
 fi
 
-    # Install firmware for AMD GPU
-    sudo apt update
-    sudo apt install firmware-amd-graphics -y
-    echo "AMD GPU firmware installed successfully."
-
-
 #################################################################################
-
 
 # Installing fonts
 sudo dnf install curl cabextract xorg-x11-font-utils fontconfig -y
@@ -397,24 +398,17 @@ rm ./FiraCode.zip ./Meslo.zip ./WPS-FONTS.zip
 	# Enable trim support
 	sudo systemctl enable fstrim.timer
 #################################################
-	# Install Apps
-
-
 
 	# Audio
 	[ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
 	[ -f /usr/bin/pulseeffects ] && [ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
 -----------------------------------------------
 
-
-
-
 	# Configure fortune
 	# If you want to display a specific fortune file or category, you can use the -e option followed by the file or category name. For example:
 	# fortune -e art ascii-art bofh-excuses computers cookie definitions disclaimer drugs education fortunes humorists kernelnewbies knghtbrd law linux literature miscellaneous news people riddles science
 	# or to see a list:
 	# fortune -f
-
 
 	# Execute rygel to start DLNA sharing
 	/usr/bin/rygel-preferences
